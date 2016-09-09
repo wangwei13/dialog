@@ -2,7 +2,7 @@
     //私有函数
     function Dialog($ele, options){
         this.$ele = $ele;
-        this.opts = $.extend({},$.fn.popWin.defaults,options);
+        this.opts = $.extend({},$.fn.dialog.defaults,options);
     }
     var popDialog,titleDialog,descDialog,btnDialog;
     Dialog.prototype = {
@@ -41,29 +41,29 @@
                     .attr({'data-index':index, 'class':_this.opts.btnCssName})
                     .on('click', function() {
                         _this.opts.callback($(this).attr('data-index'));
-                        $.fn.popWin.hide(_this.$ele);
+                        $.fn.dialog.hide(_this.$ele);
 
                     }));
             });
             this.$ele.append(popDialog);
-            $.fn.popWin.show(this.$ele);
+            $.fn.dialog.show(this.$ele);
         }
     }
 
     //定义暴露函数
-    $.fn.popWin = function(options){
-        var dialog = new Dialog(this,options);
-        dialog.createDialog();
+    $.fn.dialog = function(options){
+        var dialogF = new Dialog(this,options);
+        dialogF.createDialog();
         return this;
     }
-    $.fn.popWin.show = function($ele){
+    $.fn.dialog.show = function($ele){
         $ele.show();
     }
-    $.fn.popWin.hide = function($ele){
+    $.fn.dialog.hide = function($ele){
         $ele.hide(); 
         $('.pop-win').remove();
     }
-    $.fn.popWin.defaults={
+    $.fn.dialog.defaults={
         width: '600', //弹窗宽
         height: '250', //弹窗高
         title: '标题', //标题
